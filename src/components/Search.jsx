@@ -60,7 +60,7 @@ const Search = () => {
             displayName: user.displayName,
             photoURL: user.photoURL,
           },
-          [combinedUid + ".data"]: serverTimestamp(),
+          [combinedUid + ".date"]: serverTimestamp(),
         });
         //updating searched user chat
         await updateDoc(doc(db, "userChats", user.uid), {

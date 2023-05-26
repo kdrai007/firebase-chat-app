@@ -13,7 +13,7 @@ const Navbar = () => {
         <span>
           {currentUser.displayName ? currentUser.displayName : "john doe"}
         </span>
-        <button onClick={() => signOut(auth)}>Logout</button>
+        <button onClick={async () => await signOut(auth)}>Logout</button>
       </div>
     </div>
   );

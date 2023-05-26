@@ -8,13 +8,13 @@ import "../styles/Register.css";
 
 const Register = () => {
   const [error, setError] = useState(false);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
-    const file = e.target[3].files[0];
     if (file) {
       console.log(file);
     }
@@ -78,7 +78,11 @@ const Register = () => {
           className="register__password"
           placeholder="password"
         />
-        <input type="file" id="register__file" />
+        <input
+          type="file"
+          id="register__file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
         <label htmlFor="register__file" className="register__file-label">
           <img
             src="https://raw.githubusercontent.com/safak/youtube2022/react-chat/src/img/addAvatar.png"

@@ -19,22 +19,28 @@ const Chats = () => {
     };
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-  function handleSelect() {
-    dispatch({ type: "CHANGE_CHAT", payload: "hello there" });
+  function handleSelect(selectedUser) {
+    dispatch({ type: "CHANGE_USER", payload: selectedUser });
   }
   return (
     <div className="chats">
-      {Object.entries(Chats).map((chat) => {
-        return (
-          <div className="userChat" key={chat[0]} onClick={handleSelect}>
-            <img src={chat[1].userInfo.photoURL} alt="" />
-            <div className="userchat-info">
-              <span>{chat[1].userInfo.displayName}</span>
-              <p>hello! how are you</p>
+      {Object.entries(Chats)
+        .sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => {
+          return (
+            <div
+              className="userChat"
+              key={chat[0]}
+              onClick={() => handleSelect(chat[1].userInfo)}
+            >
+              <img src={chat[1].userInfo.photoURL} alt="" />
+              <div className="userchat-info">
+                <span>{chat[1].userInfo.displayName}</span>
+                <p>{chat[1].lastMessage?.text}</p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };
